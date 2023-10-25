@@ -1,23 +1,30 @@
-const details = document.querySelectorAll("details");
-details.forEach((targetDetail) => {
-  targetDetail.addEventListener("click", () => {
-    details.forEach((detail) => {
-      if (detail !== targetDetail) {
-        detail.removeAttribute("open");
-      }
+let addBtn = document.getElementById ("#addBtn");
+addBtn.addEventListener("click", () => {
+  let stickyCont = document.querySelector(".sticky-container");
+  let stickySingle = document.createElement('div');
+  stickySingle.classList.add('sticky');
+  stickySingle.contenEditable = "true";
+  stickySingle.setAttribute = ("role", "textbox");
+  stickySingle.innerHTML = "..."
+  stickyCont.appendChild(stickySingle);
+  let close = document.createElement('span');
+  close.classList.add('close');
+  close.innerHTML = "x";
+  close.contenEditable ="false";
+  stickySingle.appendChild(close);
+  let stickies = document.getElementsByClassName("sticky");
+  let xs =document.getElementsByClassName("close");
+  for(let i=0;i<stickies.length;i++){
+    xs[i].addEventListener("click",()=>{
+      console.log(stickies.length);
+      stickies[i].style.dispaly="none";
     });
-  });
+  }
+  function randomNumber(min, max){
+    return Math.random()*(max-min)-min;
+  }
+  let angle=randomNumber(-4,4);
+  stickySingle.style.transform="rotate(" + angle + "deg)";
+  let color = randomNumber(1, 720);
+  stickySingle.style.filter= "hue-rotate(" + color +"deg)";
 });
-
-const controls = document.querySelectorAll(".tab-control");
-let faqImg = document.querySelector(".imgs");
-
-// start first img
-faqImg.style.background = `url(${imgs[0]}) no-repeat center center`;
-
-// add event listener for all controls
-for (let i = 0; i < controls.length; i++) {
-  controls[i].addEventListener("click", () => {
-    faqImg.style.background = `url(${imgs[i]}) no-repeat center center`;
-  });
-}
